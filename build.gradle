@@ -14,4 +14,9 @@ task grade(type: JavaExec) {
     classpath = sourceSets.test.runtimeClasspath
 }
 
+task t1(type: JavaExec) {
+    main = "com.okaram.grading.GradingListener"
+    classpath= sourceSets.test.runtimeClasspath
+    args= ["com.okaram.grading.TestGrade"]
+}
 

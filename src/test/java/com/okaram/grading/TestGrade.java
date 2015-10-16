@@ -23,11 +23,11 @@ public class TestGrade {
         Assert.assertTrue(false);
     }
 
-
+/*
     public static void main(String[] args) {
         JUnitCore core= new JUnitCore();
         core.addListener(new GradingListener());
         core.run(TestGrade.class);
     }
-    
+*/    
 }
