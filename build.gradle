@@ -1,0 +1,17 @@
+apply plugin: 'java'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	testCompile 'junit:junit:4.12'
+	compile 'junit:junit:4.12'
+}
+
+task grade(type: JavaExec) {
+	main = "com.okaram.grading.TestGrade"
+    classpath = sourceSets.test.runtimeClasspath
+}
+
+
