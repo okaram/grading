@@ -36,6 +36,17 @@ public class GradingListener extends RunListener {
     }
 
     @Override
+    public void testIgnored(Description d) {
+        Grade g=d.getAnnotation(Grade.class);
+        if(g==null)  {// test was not graded
+            ungradedTests++;
+        }
+        else {
+            ignoredPoints+=g.points();
+        }
+    }
+
+    @Override
     public void testFinished(Description d)
     {
         Grade g=d.getAnnotation(Grade.class);
@@ -45,7 +56,6 @@ public class GradingListener extends RunListener {
             gradedTests++;
             ranPoints+=g.points();
         }
-        System.out.println("Graded "+d.getDisplayName()+ " gradedTests="+gradedTests);
     }
 
     public static GradingListener gradeTestsForClasses(String classNames[], boolean printMessages) throws ClassNotFoundException
