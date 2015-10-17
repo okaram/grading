@@ -3,13 +3,18 @@ package com.okaram.grading;
 import org.junit.runner.notification.*;
 import org.junit.runner.Description;
 import org.junit.runner.JUnitCore;
-
+import java.text.MessageFormat;
 
 public class GradingListener extends RunListener {
     protected int ranPoints=0, failedPoints=0, ignoredPoints=0, gradedTests=0, ungradedTests=0;
     boolean printMessages; // TODO: make it do something useful :)
 
     GradingListener(boolean printMessages) {
+        ranPoints=0;
+        failedPoints=0;
+        ignoredPoints=0;
+        gradedTests=0;
+        ungradedTests=0;
         this.printMessages=printMessages;
     }
 
@@ -40,6 +45,7 @@ public class GradingListener extends RunListener {
             gradedTests++;
             ranPoints+=g.points();
         }
+        System.out.println("Graded "+d.getDisplayName()+ " gradedTests="+gradedTests);
     }
 
     public static GradingListener gradeTestsForClasses(String classNames[], boolean printMessages) throws ClassNotFoundException
@@ -64,6 +70,10 @@ public class GradingListener extends RunListener {
         } 
 
         GradingListener l=gradeTestsForClasses(args, true);
-        System.out.println(""); // print something useful
+        System.out.println(
+                MessageFormat.format("Graded {0} tests. Got {1} out of {2} points ({3} ignored)",
+                        l.getGradedTests(),l.getRanPoints()-l.getFailedPoints(), l.getRanPoints(), l.getIgnoredPoints()
+                )
+        ); // print something useful
     }
 }

@@ -9,3 +9,8 @@ gradle-app.setting
 
 # okaram - ignore vi backup files
 *~
+#okaram -intellij project files
+*.iml
+*.ipr
+*.iws
+.idea

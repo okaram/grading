@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'idea'
 
 repositories {
 	mavenCentral()
@@ -9,14 +10,14 @@ dependencies {
 	compile 'junit:junit:4.12'
 }
 
-task grade(type: JavaExec) {
-	main = "com.okaram.grading.TestGrade"
-    classpath = sourceSets.test.runtimeClasspath
+test {
+    exclude '**/ignore/**'
 }
 
-task t1(type: JavaExec) {
+task grade(type: JavaExec) {
     main = "com.okaram.grading.GradingListener"
     classpath= sourceSets.test.runtimeClasspath
-    args= ["com.okaram.grading.TestGrade"]
+    args= ["com.okaram.grading.ignore.TestWithSucceedAndFail"]
+    
 }
 
