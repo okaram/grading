@@ -1,8 +1,14 @@
 apply plugin: 'java'
 apply plugin: 'idea'
 
+apply plugin: 'maven'
+apply plugin: 'signing'
+
 repositories {
 	mavenCentral()
+    maven {
+        url  "http://dl.bintray.com/orlando-karam/maven" 
+    }
 }
 
 dependencies {
@@ -18,6 +24,23 @@ task grade(type: JavaExec) {
     main = "com.okaram.grading.GradingListener"
     classpath= sourceSets.test.runtimeClasspath
     args= ["com.okaram.grading.ignore.TestWithSucceedAndFail"]
-    
+    dependencies {
+//        compile 'com.okaram:grading'
+    }    
 }
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
 
